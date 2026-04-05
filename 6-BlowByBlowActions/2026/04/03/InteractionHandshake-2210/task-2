@@ -1,0 +1,6 @@
+- [x] Create `3-js/5-interaction/52-interaction-handlers.js`.
+- [x] Export `bindInteractions(canvas, state, GEM_MANIFEST, vertices, triangles)`.
+- [x] Internally import `setupInteraction`, `handleFlips`, and `harvestInterest` recursively relative.
+- [x] Remove Section 5 entirely from `main.js`.
+- [x] Remove the obsolete imports `setupInteraction`, `handleFlips`, and `harvestInterest` from `main.js`.
+- [x] Import and invoke `bindInteractions` centrally inside `main.js`.

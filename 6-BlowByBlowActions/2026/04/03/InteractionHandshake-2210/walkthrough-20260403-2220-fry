@@ -1,0 +1,19 @@
+# Extraction Complete: Interaction Switchboard
+
+The central switchboard regulating logic binding inputs (Clicks, Zooming, and Rotations)—also known as the Interaction Handshake—was cleanly extracted from `main.js`. 
+
+## What Was Changed
+- **`52-interaction-handlers.js` (NEW):**
+  - Isolates and manages the entire closure of `setupInteraction(canvas, onRotate, onClick)`.
+  - Natively imports its required dependencies (`setupInteraction` from `50-input.js` and `handleFlips/harvestInterest` from `41-economy.js`).
+  - Exports a neat `bindInteractions` wrapper, ensuring the master loop only calls a single parameter-passing configuration step!
+- **`main.js`:** 
+  - Shed another robust ~36 lines and completely removed 3 obsolete imports for a drastically consolidated footprint.
+  - Passes its internal single source of truth configurations directly to `bindInteractions`, preserving geometric mapping.
+
+## Next Steps
+> [!IMPORTANT]
+> Since this section connects UI controls over to mathematical interactions, try pressing the `ZOOM +` / `ZOOM -`, `ROTATION`, and `RESET` console buttons in the Live Preview.
+> Also, confirm your node clicks are still generating captures seamlessly.
+
+I'll wait for your test results and a final "Go" before we perform the next (and likely final!) layer isolation!

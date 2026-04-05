@@ -1,0 +1,36 @@
+# Interaction Handshake Extraction Plan
+
+This plan aims to extract the comprehensive callback switchboard—the "Interaction Handshake" from Section 5—into its own module logically nestled in the `3-js/5-interaction` folder.
+
+## User Review Required
+
+> [!IMPORTANT]  
+> Please review this extraction plan. As always, I am doing only one subfolder chunk to ensure stability. I will wait for your "Go" before touching any code.
+
+## Proposed Changes
+
+### 5-interaction Module
+
+#### [NEW] [52-interaction-handlers.js](file:///c:/dev/GEM-VP-Circumvade/3-js/5-interaction/52-interaction-handlers.js)
+- Migrate the lengthy `setupInteraction` implementation out of `main.js`.
+- Create a new exported function `bindInteractions(canvas, state, GEM_MANIFEST, vertices, triangles)`.
+- Make it responsible for importing `setupInteraction` from `50-input.js` internally, as well as importing `handleFlips` and `harvestInterest` from `41-economy.js`.
+- It will handle all Zooming, Rotation, Reset, and Canvas Click mapping logic.
+
+### Main Execution Context
+
+#### [MODIFY] [main.js](file:///c:/dev/GEM-VP-Circumvade/3-js/main.js)
+- Remove the ~36 lines forming Section 5 (INTERACTION HANDSHAKE).
+- Remove the imports for `setupInteraction`, `handleFlips`, and `harvestInterest` as `main.js` will no longer depend on them directly.
+- Add an import for `bindInteractions` from `./5-interaction/52-interaction-handlers.js` and call it gracefully.
+
+## Open Questions
+
+> [!WARNING]
+> This extraction will drastically slim `main.js` down to just its central variable declarations and startup routines. Do you approve this chunk, or would you prefer extracting the Executor 'RUN BUTTON' logic first?
+
+## Verification Plan
+
+### Manual Verification
+- In the Live Preview, click the UI buttons like `ZOOM +`, `ZOOM -`, `ROTATION`, and `RESET`.
+- Check if canvas clicks continue successfully triggering captures.

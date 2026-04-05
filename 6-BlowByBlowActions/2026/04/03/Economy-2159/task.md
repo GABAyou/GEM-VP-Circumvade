@@ -1,0 +1,5 @@
+- [x] Create `3-js/4-domain-logic/41-economy.js`.
+- [x] Ensure the dynamic import in `41-economy.js` properly specifies `./40-rules.js`.
+- [x] Pass `vertices`, `triangles`, and `GEM_MANIFEST` strictly by reference.
+- [x] Remove Section 6 from `main.js` and add the import for `handleFlips` and `harvestInterest`.
+- [x] Update caller lines inside the `setupInteraction` click handler.

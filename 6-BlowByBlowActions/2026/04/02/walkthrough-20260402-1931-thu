@@ -1,0 +1,17 @@
+# Extraction Complete: HUD Updater
+
+The HUD Updater component has been successfully extracted from `main.js` and modularized into `3-js/6-ui-components/62-hud.js`.
+
+## What Was Changed
+- **`62-hud.js`:** Now encapsulates all the DOM manipulating UI updates related to scores, current turn, and CP resources. 
+  - Uses the correct relative path `../1-manifest/10-manifest.js` to fetch its required dependencies directly.
+  - Automatically exports and exposes `window.updateHUD` so dependent external files seamlessly maintain compatibility.
+- **`main.js`:**
+  - Removed the ~25 line chunk containing the `window.updateHUD` configuration block.
+  - Substituted the removed block with a simple, dynamic import pointing at `./6-ui-components/62-hud.js`.
+
+## Next Steps
+> [!IMPORTANT]
+> Please test the UI changes in the Live Server preview. Clicking anywhere on the sphere should successfully update the scores and switch between White and Magenta at the top HUD bar without any errors.
+
+As requested, I'm waiting for your confirmation!

@@ -1,0 +1,36 @@
+# Economy & Game Logic Extraction Plan
+
+This plan aims to abstract the `handleFlips` and `harvestInterest` functions from Section 6 of `main.js` and isolate them within the `4-domain-logic` domain to form a self-contained ruleset layer.
+
+## User Review Required
+
+> [!IMPORTANT]  
+> Please review this extraction plan. Since we are doing only one folder at a time, I will extract this section, update the necessary parameters, and await your validation!
+
+## Proposed Changes
+
+### 4-domain-logic Module
+
+#### [NEW] [41-economy.js](file:///c:/dev/GEM-VP-Circumvade/3-js/4-domain-logic/41-economy.js)
+- Migrate the `handleFlips` and `harvestInterest` functions here.
+- Add `vertices`, `triangles`, and `GEM_MANIFEST` as explicit parameters to bypass global dependencies safely.
+- Modify the dynamic import inside `handleFlips` to utilize the local `./40-rules.js` path instead of reaching out across contexts.
+
+### Main Execution Context
+
+#### [MODIFY] [main.js](file:///c:/dev/GEM-VP-Circumvade/3-js/main.js)
+- Erase the ~26 line chunk composing Section 6 (ECONOMY & GAME LOGIC).
+- Add an `import` at the top of the file explicitly pulling `handleFlips` and `harvestInterest` from `./4-domain-logic/41-economy.js`.
+- Update the callback on line ~72 to call the isolated `handleFlips` mathematically securely by passing the `vertices` and `triangles` refs in.
+- Update the call to `harvestInterest` to explicitly pass in `GEM_MANIFEST`.
+
+## Open Questions
+
+> [!WARNING]
+> Is `4-domain-logic/41-economy.js` the file target you approve for this, or do you prefer targeting the `Interaction Handshake` module first?
+
+## Verification Plan
+
+### Manual Verification
+- Execute a White (or Magenta) play by clicking a locked-in node natively in the Toughbook Live Preview.
+- Verify if the `handleFlips` engine captures surrounding nodes cleanly and if `harvestInterest` prints its `ECONOMY:` output into the freshly extracted Game Console accurately.

@@ -1,0 +1,35 @@
+# Mouse Snapping Extraction Plan
+
+This plan focuses on extracting the complex coordinate mapping and 3D-to-2D depth calculation logic (the "Mouse Snapping" system) out of `main.js` into its own isolated module: `3-js/5-interaction/51-mouse-snapping.js`.
+
+## User Review Required
+
+> [!IMPORTANT]  
+> Please review this extraction plan. As per your instructions, I'm proposing this single extraction and will wait for your "Go" before making any changes.
+
+## Proposed Changes
+
+### 5-interaction Module
+
+#### [NEW] [51-mouse-snapping.js](file:///c:/dev/GEM-VP-Circumvade/3-js/5-interaction/51-mouse-snapping.js)
+- Migrate the `window.addEventListener('mousemove')` block from Section 7 of `main.js`.
+- Wrap the logic inside an exported function: `setupMouseSnapping(canvas, state, vertices, triangles, GEM_MANIFEST)`. 
+- This cleanly encapsulates all projection math, boundary collision, and CSS resolution scaling natively.
+
+### Main Execution Context
+
+#### [MODIFY] [main.js](file:///c:/dev/GEM-VP-Circumvade/3-js/main.js)
+- Remove the ~34 lines of the Mouse Snapping block.
+- Import `setupMouseSnapping` from `./5-interaction/51-mouse-snapping.js`.
+- Invoked it natively during the setup phase (e.g., right under the `50-input.js` Initialization) passing all necessary constants by reference (`canvas, state, vertices, triangles, GEM_MANIFEST`), taking advantage of ES6 object references to automatically cascade `state.hoveredId` updates back into the main loop.
+
+## Open Questions
+
+> [!WARNING]
+> Since we use `state.hoveredId`, passing `state` as an object reference works perfectly. Once you give me the 'Go', I will extract this chunk next. Let me know if you would rather focus on the `Economy & Game Logic` extraction first instead.
+
+## Verification Plan
+
+### Manual Verification
+- Move the mouse across the Geodesic Sphere in the Live Preview.
+- Assert that snapping target locks logic persists dynamically across nodes/faces and updates the `state.hoveredId` accurately (verified visually via dots hovering and becoming 'ghost' colored).

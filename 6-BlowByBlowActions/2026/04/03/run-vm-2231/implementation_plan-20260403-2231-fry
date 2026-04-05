@@ -1,0 +1,34 @@
+# Run Button / VM Extraction Plan
+
+This plan aims to abstract the final piece of event binding logic—the Executor RUN Button invocation—from `main.js` into its structurally designated placeholder module `3-js/7-programming/71-vm.js`.
+
+## User Review Required
+
+> [!IMPORTANT]  
+> Please review this final extraction plan. `main.js` is already super clean at 75 lines, but stripping this block will make it a 100% pure Controller/Injector, moving the Dynamic Code Execution responsibilities fully over to the `./7-programming` folder.
+
+## Proposed Changes
+
+### 7-programming Module
+
+#### [MODIFY] [71-vm.js](file:///c:/dev/GEM-VP-Circumvade/3-js/7-programming/71-vm.js)
+- Migrate the `btnRun` event listener and dynamic import structure into an exported UI wrapper function: `bindRunButton(state, vertices, GEM_MANIFEST)`.
+- It will natively handle the relative `import('./70-executor.js')` so that VM-specific processing remains physically isolated inside the `7-programming` module suite.
+
+### Main Execution Context
+
+#### [MODIFY] [main.js](file:///c:/dev/GEM-VP-Circumvade/3-js/main.js)
+- Remove the ~16 lines constructing the `runBtn` listener event block.
+- Add an import for `bindRunButton` sourced from `./7-programming/71-vm.js`.
+- Invoke `bindRunButton(state, vertices, GEM_MANIFEST)` dynamically at the very bottom, wrapping up the dependency injection phase.
+
+## Open Questions
+
+> [!WARNING]
+> This extracts the final action-listener remaining inside `main.js`. Do you approve migrating this specific functionality into `71-vm.js`? Feel free to give me your "Go!" 
+
+## Verification Plan
+
+### Manual Verification
+- In the Toughbook Live Preview, click the `RUN` button.
+- Ensure the Game Console logs "EXECUTOR: Sequence starting..." and executes successfully without throwing any scope errors.

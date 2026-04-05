@@ -1,0 +1,6 @@
+- [x] Create/Update `3-js/7-programming/71-vm.js`.
+- [x] Implement and export `bindRunButton(state, vertices, GEM_MANIFEST)`.
+- [x] Migrate the `runBtn` event listener from `main.js`.
+- [x] Structure the dynamic import path tightly as `"./70-executor.js"`.
+- [x] Eliminate Section 9 (`runBtn`) from `main.js`.
+- [x] Initialize `bindRunButton` natively in `main.js`.

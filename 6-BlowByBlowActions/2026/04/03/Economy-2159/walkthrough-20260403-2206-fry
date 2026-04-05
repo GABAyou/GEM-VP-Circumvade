@@ -1,0 +1,19 @@
+# Extraction Complete: Economy & Game Logic
+
+The mathematical capturing and score calculations (`handleFlips` and `harvestInterest`) have been migrated perfectly out of `main.js` and securely confined inside `3-js/4-domain-logic/41-economy.js`.
+
+## What Was Changed
+- **`41-economy.js` (NEW):**
+  - Isolates the `handleFlips` array modification sequence.
+  - Dynamically grabs `./40-rules.js` correctly with a strictly relative path, conforming to local Live Server bounds.
+  - Generates the `ECONOMY:` log reports and pushes them dynamically to our decoupled Game Console!
+- **`main.js`:** 
+  - Shrunk significantly by another ~27 lines.
+  - Safely invokes `handleFlips` and `harvestInterest` when the `CANVAS_CLICK` event activates the target locked node by gracefully piping the array references directly through the parameter bounds (`vertices`, `triangles`, etc.).
+
+## Next Steps
+> [!IMPORTANT]
+> Since we moved the core logic dictating ownership mapping, please perform a CAPTURE by clicking an empty node in the Geodesic Sphere using the Toughbook Live Preview.
+> Ensure that the capturing occurs structurally and that the "ECONOMY: W:+X M:+Y CP earned." message prints natively on the Green Console!
+
+Let me know if the Live Preview reflects the capture without errors, and hand me an affirmative "Go" when you're ready!

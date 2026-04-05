@@ -1,0 +1,18 @@
+# Extraction Complete: Mouse Snapping
+
+The complex mathematical mouse hover and 3D coordinate target-locking logic was successfully separated from `main.js` and abstracted into the interaction layer at `3-js/5-interaction/51-mouse-snapping.js`.
+
+## What Was Changed
+- **`51-mouse-snapping.js` (NEW):**
+  - Isolates the `window.addEventListener('mousemove')` tracking code.
+  - Houses the 3D-to-2D rotational matrix array calculations natively.
+  - Implements the strict `0.55` `scale` modifier mapped to the canvas bounds to align cleanly with `30-renderer.js`.
+- **`main.js`:** 
+  - Shrunk significantly by another ~34 lines.
+  - Now imports `setupMouseSnapping()` and boots it immediately after the primary `setupInteraction()` controller. Object references like `state`, `vertices`, and `triangles` are safely passed dynamically so the main array remains cleanly updated through the hover lock logic!
+
+## Next Steps
+> [!IMPORTANT]
+> Since we moved raw interaction formulas and geometry mappings, please move your cursor over the Geodesic Sphere in the Live Server preview. You should see the nodes light up with the designated "Ghost" effect and capture accurately!
+
+Stop right here, give it a quick test on the Toughbook, and give me a "Go" when you're ready to proceed to the next abstraction!
