@@ -3,7 +3,8 @@ export async function handleFlips(id, player, isV, vBoard, vertices, triangles, 
         const Rules = await import('./40-rules.js');
         // If 'vertices' isn't available in the scope, this line crashes
         if (isV) {
-            const flips = Rules.checkVertexFlips(id, player, vertices, vBoard);
+            let flips = Rules.checkVertexFlips(id, player, vertices, vBoard);
+            flips = flips.filter(fId => (vBoard[fId] || 0) <= 10);
             flips.forEach(fId => vBoard[fId] = player);
             if (flips.length > 0) window.gameLog(`CAPTURE: Flipped ${flips.length} nodes!`);
         }

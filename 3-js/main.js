@@ -58,4 +58,4 @@ setupMouseSnapping(canvas, state, vertices, triangles, GEM_MANIFEST);
 startRenderLoop(canvas, ctx, state, triangles, vertices, GEM_MANIFEST);
 window.updateHUD();
 
-bindRunButton(state, vertices, GEM_MANIFEST);
+bindRunButton(state, vertices, GEM_MANIFEST, triangles);

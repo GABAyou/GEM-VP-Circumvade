@@ -38,25 +38,13 @@ window.mintCard = function() {
     GEM_MANIFEST.deck.push(newCard);
 
     // 2. NEW: LOAD DIRECTLY TO PLAY SLOTS
-    const slots = document.querySelectorAll('.logic-slot');
+    const emptySlotIdx = GEM_MANIFEST.hand.findIndex(s => s === null);
     let filled = false;
 
-    for (let slot of slots) {
-        if (slot.innerHTML === "") { // Find first empty slot
-            const cardDiv = document.createElement('div');
-            cardDiv.className = 'gem-card active-card';
-            cardDiv.innerText = newCard.label;
-            cardDiv.dataset.action = newCard.action; // Store for Executor
-            
-            // High-Contrast styling for v2.0
-            cardDiv.style.border = "2px solid #33ff33";
-            cardDiv.style.color = "#33ff33";
-            cardDiv.style.backgroundColor = "#000";
-            
-            slot.appendChild(cardDiv);
-            filled = true;
-            break;
-        }
+    if (emptySlotIdx !== -1) {
+        GEM_MANIFEST.hand[emptySlotIdx] = newCard;
+        if (window.renderHand) window.renderHand();
+        filled = true;
     }
 
     // 3. LOW-VISION FEEDBACK

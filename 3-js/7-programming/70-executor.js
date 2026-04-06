@@ -65,8 +65,25 @@ export function runCompound(sphereState, triangles) {
                       if (window.renderHand) window.renderHand();
                       if (window.updateHUD) window.updateHUD();
                       break;
-                
 
+                case 'GUARD': {
+                      const lockedId = sphereState.lockedId;
+                      if (lockedId === null || lockedId === undefined) {
+                          window.gameLog("GUARD ERROR: No locked node selected.", "error");
+                          break;
+                      }
+                      const currentStatus = GEM_MANIFEST.vertexBoard[lockedId] || 0;
+                      if (currentStatus === 1 || currentStatus === 2) {
+                          GEM_MANIFEST.vertexBoard[lockedId] = currentStatus + 10;
+                          window.gameLog(`SYSTEM: Node ${lockedId} Guarded!`, "system");
+                      } else if (currentStatus > 10) {
+                          window.gameLog("GUARD ERROR: Node is already guarded.", "error");
+                      } else {
+                          window.gameLog("GUARD ERROR: Cannot guard an unowned node.", "error");
+                      }
+                      break;
+                }
+                
                 default:
                     console.warn(`EXECUTOR: Unknown Command [${cmd}]`);
             }

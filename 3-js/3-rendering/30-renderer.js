@@ -62,22 +62,31 @@ export function startRenderLoop(canvas, ctx, state, triangles, vertices, GEM_MAN
                 const y2 = v.y * Math.cos(state.rotX) - z1 * Math.sin(state.rotX);
                 const sx = cX + x1 * scale, sy = cY + y2 * scale;
                 const status = GEM_MANIFEST.vertexBoard[v.id] || 0;
+                const innerStatus = status % 10;
                 
                 ctx.beginPath();
-                ctx.arc(sx, sy, status === 0 ? 3 : 8, 0, Math.PI * 2);
-                if (status === 0) {
+                ctx.arc(sx, sy, innerStatus === 0 ? 3 : 8, 0, Math.PI * 2);
+                if (innerStatus === 0) {
                     ctx.fillStyle = (v.id === state.hoveredId) ? GEM_MANIFEST.theme.ghost : (v.isNorth ? "#ff3333" : (v.isSouth ? "#3333ff" : "#33ff33"));
                 } else {
-                    ctx.fillStyle = (status === 1) ? "#ffffff" : "#ff00ff";
+                    ctx.fillStyle = (innerStatus === 1) ? "#ffffff" : "#ff00ff";
                 }
                 ctx.fill();
+
+                if (status > 10) {
+                    ctx.beginPath();
+                    ctx.arc(sx, sy, 12, 0, Math.PI * 2);
+                    ctx.strokeStyle = "#33ff33";
+                    ctx.lineWidth = 3;
+                    ctx.stroke();
+                }
 
                 // DRAW GOLD LOCK (sx/sy now safely defined here)
                 if (v.id === state.lockedId) {
                     ctx.beginPath();
-                    ctx.arc(sx, sy, 12, 0, Math.PI * 2); 
+                    ctx.arc(sx, sy, 16, 0, Math.PI * 2); 
                     ctx.strokeStyle = "#ffcc00"; 
-                    ctx.lineWidth = 4;
+                    ctx.lineWidth = 3;
                     ctx.stroke();
                 }
             }
