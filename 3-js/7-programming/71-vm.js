@@ -9,7 +9,7 @@ export function bindRunButton(state, vertices, GEM_MANIFEST, triangles) {
                     get rotX() { return state.rotX; }, set rotX(v) { state.rotX = v; },
                     get lockedId() { return state.lockedId; }
                 };
-                m.runCompound(sphereState, triangles);
+                m.runCompound(sphereState, triangles, vertices);
                 window.updateHUD();
             }).catch(err => {
                 window.gameLog("ERROR: Executor failed: " + err.message, "error");

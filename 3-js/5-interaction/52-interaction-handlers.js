@@ -1,5 +1,5 @@
 import { setupInteraction } from './50-input.js';
-import { handleFlips, harvestInterest } from '../4-domain-logic/41-economy.js';
+import { handleFlips, harvestInterest, processMaintenance } from '../4-domain-logic/41-economy.js';
 
 export function bindInteractions(canvas, state, GEM_MANIFEST, vertices, triangles) {
     setupInteraction(canvas, (dx, dy) => {
@@ -32,6 +32,7 @@ export function bindInteractions(canvas, state, GEM_MANIFEST, vertices, triangle
                 // Pass the MASTER board here
                 handleFlips(state.hoveredId, currentPlayer, isV, GEM_MANIFEST.vertexBoard, vertices, triangles, GEM_MANIFEST);
                 harvestInterest(GEM_MANIFEST);
+                processMaintenance(GEM_MANIFEST);
 
                 GEM_MANIFEST.metadata.activePlayer = (currentPlayer === 1) ? 2 : 1;
                 window.updateHUD();
