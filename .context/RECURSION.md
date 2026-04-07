@@ -141,6 +141,9 @@
 - **Action**: Verified the visual feedback (Green Ring) and economic protection (Flip-Skip) in a live session.
 - **State**: Guardian 'GUARD' command is now a fully functional core mechanic of the 3.0 Modular Era.
 
-
+## [Pair #178] - 2026-04-05 - Total Command Decoupling
+- **Logic**: Determined that partial migration is riskier than total migration; opted for a 100% dynamic command registry.
+- **Action**: Directed the agent to extract all remaining switch-case logic into standalone /1-commands/ modules.
+- **State**: 70-executor.js is now a pure routing agent; all game actions are fully modularized.
 
 
